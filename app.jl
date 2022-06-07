@@ -24,7 +24,7 @@ app.layout = html_div(
 end
 
 callback!(app, Output("greekOutput", "children"), Input("betaCodeInput", "value")) do input_value
-    "$(BetaReader.transcode(input_value))"
+    "$(BetaReader.transcodeGreek(input_value))"
 end
 
 run_server(app, "0.0.0.0", debug=true)
