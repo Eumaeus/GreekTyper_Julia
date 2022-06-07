@@ -1,8 +1,17 @@
+
+
+
+
 /* Local */
-#greekOutput {
+#unicodeOutput {
 	font-size: 150%;
 	padding: 0.5em;
 	border: 1px solid silver;
+	margin-top:  1em;
+}
+
+#greekOutput {
+	border:  none;
 }
 
 p.bigPosTag a {
@@ -11,8 +20,9 @@ p.bigPosTag a {
 	padding: 10px;
 }
 
-#greekInput {
+#betaCodeInput {
 	font-size: 150%;
+	padding:  1em;
 }
 
 #uCodeLabel {
@@ -1084,9 +1094,7 @@ header, footer {
 	color: #777;
 }
 
-footer, .push {
-    height: 200px; /* .push must be the same height as .footer */
-}
+
 
 header {
 	font-size: 120%;
@@ -1096,10 +1104,10 @@ header {
 
 footer {
 	font-size: 80%;
-	bottom: 0;
-	left: 0;
-	position: absolute;
 	width: 100%;
+	position: relative;
+	color:  #229;
+	margin-top:  5em;
 }
 
 h1 {
@@ -1115,7 +1123,7 @@ h2 {
 
 
 body {
-	font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font: 24px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 400;
 	line-height: 1.4em;
 	color: #4d4d4d;
