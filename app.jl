@@ -18,7 +18,7 @@ app.layout = html_div(
     html_h1() do 
         html_p("Greek Typer"),
         html_p(id = "app_header_versionInfo",
-            "version 0.1.0"
+            "version 1.0.0"
         )
     end,
     dcc_markdown("Type your Greek here, using [Beta Code](https://github.com/Eumaeus/BetaReader.jl)."),
