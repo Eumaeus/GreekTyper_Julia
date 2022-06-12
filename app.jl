@@ -23,10 +23,19 @@ app.layout = html_div(
     end,
     dcc_markdown("Type your Greek here, using [Beta Code](https://github.com/Eumaeus/BetaReader.jl)."),
     dcc_textarea(id = "betaCodeInput", placeholder = "mh=nin a)/eide qea/, Phlhi+a/dew A)xille/ws", value = "" ),
-    dcc_markdown("Unicode output below; click to copy."),
+    dcc_markdown("Unicode output below."),
     html_div(id = "unicodeOutput") do 
         html_a(id = "greekOutput")
     end,
+    dcc_clipboard(
+        target_id = "unicodeOutput",
+        title = "copy",
+        style = Dict(
+            "display" => "inline-block",
+            "fontsize" => 40,
+            "verticalAlign" => "top"
+        )
+    ), 
 
     html_footer(footer_text)
 
