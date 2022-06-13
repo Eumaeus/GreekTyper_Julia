@@ -28,16 +28,16 @@ using PolytonicGreek, Unicode, BetaReader
 Base.exit_on_sigint(false)
 
 
-assets = joinpath(pwd(), "BetaTyper", "assets")
+assets = joinpath(pwd(), "assets")
 
-external_stylesheets = ["my_stylesheet.css"]
+println("assets = $assets")
+
+external_stylesheets = ["stylesheet.css"]
 
 app = if haskey(ENV, "URLBASE")
-    println( "No URLBASE: $url_base_pathname")
-    dash(assets_folder = assets, url_base_pathname = ENV["URLBASE"], external_stylesheets = external_stylesheets)
+    dash(assets_folder = assets, url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)
 else 
-    println( "No URLBASE")
-    dash(assets_folder = assets, external_stylesheets = external_stylesheets)    
+    dash(assets_folder = assets, url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)    
 end
 
 #app = dash(external_stylesheets = external_stylesheets)
