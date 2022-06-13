@@ -32,7 +32,7 @@ assets = joinpath(pwd(), "assets")
 
 println("assets = $assets")
 
-external_stylesheets = ["stylesheet.css"]
+external_stylesheets = [assets * "stylesheet.css"]
 
 app = if haskey(ENV, "URLBASE")
     dash(assets_folder = assets, url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)
