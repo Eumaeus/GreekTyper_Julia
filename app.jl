@@ -1,3 +1,24 @@
+# Run this dashboard from the root of the
+# github repository:
+using Pkg
+Pkg.activate(joinpath(pwd(), "BetaTyper"))
+Pkg.resolve()
+Pkg.instantiate()
+
+
+DASHBOARD_VERSION = "0.2.5"
+
+# Variables configuring the app:  
+#
+#  1. location  of the assets folder (CSS, etc.)
+#  2. port to run on
+# 
+# Set an explicit path to the `assets` folder
+# on the assumption that the dashboard will be started
+# from the root of the gh repository!
+assets = joinpath(pwd(), "alpha-search", "assets")
+DEFAULT_PORT = 8050
+
 using Dash
 using DataFrames, UrlDownload
 using PolytonicGreek, Unicode, BetaReader
@@ -6,19 +27,20 @@ using PolytonicGreek, Unicode, BetaReader
 ## Clean exit on CRTL+C
 Base.exit_on_sigint(false)
 
-PORT = 1234
-if !("PORT" in keys(ENV))
-    println("PORT not set. Setting to default ", PORT)
-    ENV["PORT"] = PORT
-end
 
 assets = joinpath(pwd(), "BetaTyper", "assets")
 
-external_stylesheets = ["stylesheet.css"]
+external_stylesheets = ["my_stylesheet.css"]
 
+app = if haskey(ENV, "URLBASE")
+    println( "No URLBASE: $url_base_pathname")
+    dash(assets_folder = assets, url_base_pathname = ENV["URLBASE"], external_stylesheets = external_stylesheets)
+else 
+    println( "No URLBASE")
+    dash(assets_folder = assets, external_stylesheets = external_stylesheets)    
+end
 
-
-app = dash(external_stylesheets = external_stylesheets)
+#app = dash(external_stylesheets = external_stylesheets)
 
 footer_text = dcc_markdown("""Greek Typer was written in Julia 2022 by Christopher Blackwell with code written for the [Homer Multitext]() by Neel Smith. It is licensed under the GPL. Source and issue-tracker at https://github.com/Eumaeus/GreekTyper_Julia.""")
 
@@ -35,7 +57,7 @@ app.layout = html_div(
             "version 1.0.0"
         )
     end,
-    dcc_markdown("Type your Greek here, using [Beta Code](https://github.com/Eumaeus/BetaReader.jl)."),
+    dcc_markdown( "Type your Greek here, using [Beta Code](https://github.com/Eumaeus/BetaReader.jl)."),
     dcc_textarea(id = "betaCodeInput", placeholder = "mh=nin a)/eide qea/, Phlhi+a/dew A)xille/ws", value = "" ),
     dcc_markdown("Unicode output below."),
     html_div(id = "unicodeOutput") do 
@@ -60,15 +82,7 @@ callback!(app, Output("greekOutput", "children"), Input("betaCodeInput", "value"
 end
 
 
+run_server(app, "0.0.0.0", debug=true)
 
 
-#run_server(app, "0.0.0.0", debug=true)
 
-
-# the default Dash port is 8050, but for Heroku deployments, it's
-# important to ensure the server port matches the PORT environment
-# variable; when running the app on your own machine, omit this
-# unless PORT is set.
-port = parse(Int64, ENV["PORT"]);
-
-run_server(app, "0.0.0.0", port)
