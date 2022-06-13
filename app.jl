@@ -2,7 +2,21 @@ using Dash
 using DataFrames, UrlDownload
 using PolytonicGreek, Unicode, BetaReader
 
-external_stylesheets = ["assets/stylesheet.css"]
+
+## Clean exit on CRTL+C
+Base.exit_on_sigint(false)
+
+PORT = 1234
+if !("PORT" in keys(ENV))
+    println("PORT not set. Setting to default ", PORT)
+    ENV["PORT"] = PORT
+end
+
+assets = joinpath(pwd(), "BetaTyper", "assets")
+
+external_stylesheets = ["stylesheet.css"]
+
+
 
 app = dash(external_stylesheets = external_stylesheets)
 
@@ -48,4 +62,13 @@ end
 
 
 
-run_server(app, "0.0.0.0", debug=true)
+#run_server(app, "0.0.0.0", debug=true)
+
+
+# the default Dash port is 8050, but for Heroku deployments, it's
+# important to ensure the server port matches the PORT environment
+# variable; when running the app on your own machine, omit this
+# unless PORT is set.
+port = parse(Int64, ENV["PORT"]);
+
+run_server(app, "0.0.0.0", port)
