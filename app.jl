@@ -16,7 +16,6 @@ DASHBOARD_VERSION = "0.2.5"
 # Set an explicit path to the `assets` folder
 # on the assumption that the dashboard will be started
 # from the root of the gh repository!
-assets = joinpath(pwd(), "alpha-search", "assets")
 DEFAULT_PORT = 8050
 
 using Dash
