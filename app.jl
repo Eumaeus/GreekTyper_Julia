@@ -27,6 +27,7 @@ using PolytonicGreek, Unicode, BetaReader
 Base.exit_on_sigint(false)
 
 
+#assets = joinpath(pwd(), "assets")
 assets = joinpath(pwd(), "assets")
 
 println("assets = $assets")
