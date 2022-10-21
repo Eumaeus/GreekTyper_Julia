@@ -59,7 +59,7 @@ app.layout = html_div(
         html_p("BetaTyper"),
         html_p(id = "app_header_versionInfo",
 
-            "Type Unicode Greeek Easily! (version 1.0.0)"
+            "Type Unicode Greek Easily (version 1.0.0)"
         )
     end,
     dcc_markdown( "Type your Greek here, using [Beta Code](https://github.com/Eumaeus/BetaReader.jl/blob/main/character_table.md)."),
