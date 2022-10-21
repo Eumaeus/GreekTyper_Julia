@@ -28,21 +28,23 @@ Base.exit_on_sigint(false)
 
 
 #assets = joinpath(pwd(), "assets")
-#assets = joinpath(pwd(), "assets")
+assets = joinpath(pwd(), "BetaTyper", "assets")
 
-#println("assets = $assets")
+println("assets = $assets")
 
 external_stylesheets = ["stylesheet.css"]
 
+#=
 app = if haskey(ENV, "URLBASE")
- #   dash(assets_folder = assets, url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)
-    dash(assets_foler = "assets", url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)
+    dash(assets_folder = assets, url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)
+    #dash(assets_foler = "assets", url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)
 else 
-    #dash(assets_folder = assets, url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)    
-    dash(assets_folder = "assets", url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)    
+    dash(assets_folder = assets, url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)    
+    #dash(assets_folder = "assets", url_base_pathname = "/BetaTyper/", external_stylesheets = external_stylesheets)    
 end
+=#
 
-#app = dash(external_stylesheets = external_stylesheets)
+app = dash(external_stylesheets = external_stylesheets)
 
 footer_text = dcc_markdown("""Greek Typer was written in Julia 2022 by Christopher Blackwell with code written for the [Homer Multitext]() by Neel Smith. It is licensed under the GPL. Source and issue-tracker at https://github.com/Eumaeus/GreekTyper_Julia.""")
 
@@ -60,7 +62,7 @@ app.layout = html_div(
             "Type Unicode Greeek Easily! (version 1.0.0)"
         )
     end,
-    dcc_markdown( "Type your Greek here, using [Beta Code](https://github.com/Eumaeus/BetaReader.jl)."),
+    dcc_markdown( "Type your Greek here, using [Beta Code](https://github.com/Eumaeus/BetaReader.jl/blob/main/character_table.md)."),
     dcc_textarea(id = "betaCodeInput", placeholder = "mh=nin a)/eide qea/, Phlhi+a/dew A)xille/ws", value = "" ),
     dcc_markdown("Unicode output below."),
     html_div(id = "unicodeOutput") do 
